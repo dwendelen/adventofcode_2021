@@ -1,0 +1,114 @@
+ _a  _b  _c   mn  mx
+[ 1  15  13]   5   1
+[ 1  10  16]   3   1
+[ 1  12   2]   9   7
+[ 1  10   8]   9   2
+[ 1  14  11]   9   1
+[26 -11   6]   9   1
+[ 1  10  12]   9   5
+[26 -16   2]   5   1
+[26  -9   2]   8   1
+[ 1  11  15]   2   1
+[26  -8   1]   9   8
+[26  -8  10]   3   1
+[26 -10  14]   9   7
+[26  -9  10]   9   5
+
+---
+
+if a == 1 -> 'Push inp + _c'
+if a == 26 and head = inp - _b -> 'Pop'
+
+equal amount of 1 and 26 -> every push must be popped
+
+inp  1 + 13 = inp 14 +  9 => inp  1 = inp 14 -  4
+inp  2 + 16 = inp 13 + 10 => inp  2 = inp 13 -  6
+inp  3 +  2 = inp 12 +  8 => inp  3 = inp 12 +  6
+inp  4 +  8 = inp  9 +  9 => inp  4 = inp  9 +  1
+inp  5 + 11 = inp  6 + 11 => inp  5 = inp  6
+inp  7 + 12 = inp  8 + 16 => inp  7 = inp  8 +  4
+inp 10 + 15 = inp 11 +  8 => inp 10 = inp 11 -  7
+
+---
+
+inp
+head = z % 26
+tail = z / _a
+
+if (a == 1) {
+    // 1 <= c <= 16
+    // 1 <= inp <= 9
+    z = tail * 26 + (inp + _c)
+}
+
+if (a == 26) {
+    // -16 <= b <= 1
+    // 0 <= head
+    // 1 <= c <= 16
+    // 1 <= inp <= 9
+    if (head = inp - _b) {
+        z = tail
+    } else {
+        z = tail * 26 + (inp + _c)
+    }
+}
+
+---
+
+inp
+head = z % 26
+tail = z / _a
+
+if (a == 1) {
+    // b > 9
+    // head >= 0
+    if (head = inp - _b) {
+        z = tail
+    } else {
+        z = tail * 26 + (inp + _c)
+    }
+}
+if (a == 26) {
+    // -16 <= b < 0
+    // head >= 0
+    if (head = inp - _b) {
+        z = tail
+    } else {
+        z = tail * 26 + (inp + _c)
+    }
+}
+
+---
+
+inp
+head = z % 26
+tail = z / _a
+
+if (head = inp - _b) {
+    z = tail
+} else {
+    z = tail * 26 + (inp + _c)
+}
+
+---
+
+inp
+head = z % 26
+tail = z / _a
+
+if (head = inp - _b) {
+    x = 0
+    z = tail * (25 * x + 1) + (inp + _c) * x
+} else {
+    x = 1
+    z = tail * (25 * x + 1) + (inp + _c) * x
+}
+
+---
+
+inp
+head = z % 26
+tail = z / _a
+
+x = head + _b != inp
+z = tail * (25 * x + 1) + (inp + _c) * x
